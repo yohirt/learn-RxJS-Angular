@@ -17,7 +17,7 @@ export class AppComponent {
     name: 'Ram',
   };
 
-  agents: Observable<string>;
+  // agents: Observable<string>;
   student$: Observable<any> = of(this.studentObj);
 
   constructor() {}
@@ -28,28 +28,5 @@ export class AppComponent {
     this.student$.subscribe((data) => {
       console.log(data);
     });
-    /*
-    
-    this.agents = new Observable(function (observer) {
-      try {
-        setInterval(() => {
-          observer.next('Ram');
-        }, 500);
-
-        setInterval(() => {
-          observer.next('Mark');
-        }, 3000);
-
-        observer.next('Sita');
-      } catch (e) {
-        observer.error(e);
-      }
-    });
-
-    this.agents.subscribe((data) => {
-      this.agentName = data;
-    });
-  
-    */
   }
 }
