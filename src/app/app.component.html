@@ -1,7 +1,9 @@
-<hello name="{{ name }}"></hello>
-<today today="{{ today }}"></today>
-<p>Start editing to see some happy happen :)</p>
-<h2>Result of Observable</h2>
-<div *ngIf="agentName">{{ agentName }}</div>
-<h2>Orders</h2>
-<div *ngIf="nameOrder">{{ nameOrder }}</div>
+<button #validate (click)="rxJsEventObsevable()">Click for Observable</button>
+
+<a
+  href="http://localhost:4200/test-url"
+  #getLink
+  (mouseover)="getEventObservable()"
+>
+  Root link
+</a>
