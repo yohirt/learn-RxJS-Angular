@@ -15,6 +15,9 @@ export class SearchComponent implements OnInit {
     this.searchForm = new FormGroup({
       name: new FormControl('start search'),
     });
+    this.searchForm.get('name').valueChanges.subscribe((data) => {
+      console.log(data);
+    });
   }
 
   readValue() {}
