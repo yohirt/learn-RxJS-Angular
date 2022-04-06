@@ -14,7 +14,7 @@ export class AppComponent {
     this.orders$.subscribe((data) => {
       const seqNum$ = interval(100);
       seqNum$.subscribe((num) => {
-        if (num < 10) {
+        if (num < 2) {
           console.log(data + num);
         }
       });
