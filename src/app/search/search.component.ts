@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, Observable, take, from,first } from 'rxjs';
+import { debounceTime, Observable, take, from, last } from 'rxjs';
 import { takeLast, takeWhile } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,7 @@ import { takeLast, takeWhile } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   name: FormControl;
-  categories = ['Mobiles', 'TV', 'Charges', 'headphones'];
+  categories = ['Mobiles', 'TV', 'Charges', 'headphones','Laptops'];
   category$: Observable<string> = from(this.categories);
 
   constructor(private formBuilder: FormBuilder) {}
@@ -28,9 +28,7 @@ export class SearchComponent implements OnInit {
         debounceTime(900)
       )
       .subscribe((data) => {
-        this.category$
-          .pipe(first())
-          .subscribe((data2) => console.log(data2));
+        this.category$.pipe(last()).subscribe((data2) => console.log(data2));
         console.log(data);
       });
   }
