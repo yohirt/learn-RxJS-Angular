@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, Observable, take, from, last } from 'rxjs';
+import { debounceTime, Observable, take, from, elementAt } from 'rxjs';
 import { takeLast, takeWhile } from 'rxjs/operators';
 
 @Component({
@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
         debounceTime(900)
       )
       .subscribe((data) => {
-        this.category$.pipe(last()).subscribe((data2) => console.log(data2));
+        this.category$.pipe(elementAt(0)).subscribe((data2) => console.log(data2));
         console.log(data);
       });
   }
