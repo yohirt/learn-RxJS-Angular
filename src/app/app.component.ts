@@ -6,7 +6,15 @@ import { Observable, of, from, fromEvent, interval } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  arrOrd = ['Mobile', 'book', 'electronic', 'computers', 'AGD'];
+  arrOrd = [
+    'Mobile',
+    'book',
+    'Mobile',
+    'electronic',
+    'electronic',
+    'computers',
+    'AGD',
+  ];
   orders$: Observable<string> = from(this.arrOrd);
   constructor() {}
 

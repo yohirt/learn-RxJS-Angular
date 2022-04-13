@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, Observable, take, from, elementAt } from 'rxjs';
-import { takeLast, takeWhile } from 'rxjs/operators';
+import { distinct, takeLast, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +11,18 @@ import { takeLast, takeWhile } from 'rxjs/operators';
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
   name: FormControl;
-  categories = ['Mobiles', 'TV', 'Charges', 'headphones','Laptops'];
+  /**
+   * repeated values
+   */
+  categories = [
+    'Mobiles',
+    'Mobiles',
+    'TV',
+    'Charges',
+    'Charges',
+    'headphones',
+    'Laptops',
+  ];
   category$: Observable<string> = from(this.categories);
 
   constructor(private formBuilder: FormBuilder) {}
@@ -22,13 +33,14 @@ export class SearchComponent implements OnInit {
     });
     this.searchForm
       .get('name')
-      .valueChanges.pipe(
-        // takeWhile((v) => this.checkConditions(v)),
-        // takeLast(2),
-        debounceTime(900)
-      )
+      .valueChanges.pipe(debounceTime(900))
       .subscribe((data) => {
-        this.category$.pipe(elementAt(0)).subscribe((data2) => console.log(data2));
+        this.category$
+          /**
+           * zwróci unikalne elementy z tablicy
+           */
+          .pipe(distinct())
+          .subscribe((data2) => console.log(data2));
         console.log(data);
       });
   }
