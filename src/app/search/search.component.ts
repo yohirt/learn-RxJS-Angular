@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, Observable, take, from, elementAt } from 'rxjs';
-import { distinct, skip, takeLast, takeWhile } from 'rxjs/operators';
+import { count, distinct, skip, takeLast, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -39,7 +39,11 @@ export class SearchComponent implements OnInit {
           /**
            * zwróci unikalne elementy z tablicy i pominie dwa pierwsz
            */
-          .pipe(distinct(), skip(2))
+          .pipe(
+            // zlicz wszystkie wystąpnienia
+            distinct(),
+            count()
+          )
           .subscribe((data2) => console.log(data2));
         console.log(data);
       });
